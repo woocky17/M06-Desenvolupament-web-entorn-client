@@ -137,12 +137,18 @@ function Time() {
     let alarmSound = document.getElementById('alarmHour');
     alarmSound.src = 'Nirvana - The Man Who Sold The World (MTV Unplugged)_fregObNcHC8.mp3';
     alarmSound.load(); 
+    if (isAlarmPlaying) {   
+        alarmSound.play();
+    }
 });
 
 document.getElementById('song2').addEventListener('click', function() {
     let alarmSound = document.getElementById('alarmHour');
     alarmSound.src = 'UNSHAKEN _ Low Bass Singer Cover - Geoff Castellucci _ Red Dead Redemption 2_v2XOy7sqEmI.mp3';
     alarmSound.load(); 
+    if (isAlarmPlaying) {   
+        alarmSound.play();
+    }
 });
 
 document.getElementById('vol').addEventListener('input', function() {
