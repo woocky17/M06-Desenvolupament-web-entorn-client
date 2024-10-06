@@ -8,8 +8,46 @@
 </head>
 <body>
 
-    <h1>Propietats de la Web</h1>
-    <div id="taula_propietats"></div>
+    <p>3. 2p] Crea un document HTML amb un div amb id “taula_propietats”. Programa amb JS que es creï<br>
+        una taula formada per dos columnes. En la primera columna has de mostrar els texts indicats a<br>
+        continuació, i en la segona columna els valors corresponents obtinguts dinàmicament amb JS:<br>
+        </p>
+    <div id="llista_propietats"></div>
+    
+    <p><br>4. 3p] Afegeix al document HTML un compte enrere inicialment a 00minuts i 00segons <br></p>
+
+    <div></div>
+        <label for="">Minuts:</label>
+        <input type="number" id="minutes" min="0" value="0">
+        <label for="">Segons:</label>
+        <input type="number" id="seconds" min="0" max="59" value="0">
+    </div>
+
+    <div>
+        <button id="start">Inicia</button>
+        <button id="pause">Pausa</button>
+        <button id="reset">Restableix</button>
+    </div>
+
+    <p id="countdown">00:00</p>
+
+    <audio id="alarm" src="Nirvana - The Man Who Sold The World (MTV Unplugged)_fregObNcHC8.mp3"></audio>
+
+    <p><br>5. 5p] Afegeix un rellotge que mostri la hora, minuts i segons actuals i s’actualitzi cada segon.<br></p>
+
+    <div id="hora"></div>
+<br>
+    <label for="">Hora de l'alarma:</label>
+    <input type="time" id="alarmTime">
+    <button id="setAlarma">Estableix Alarma</button>
+    <button id="stopAlarm">Atura Alarma</button>
+    <p id="alarmStatus"></p>
+
+
+
+    <audio id="alarmHour" src="Nirvana - The Man Who Sold The World (MTV Unplugged)_fregObNcHC8.mp3"></audio>
+    <!-- <audio id="alarmHour" src="Nirvana - The Man Who Sold The World (MTV Unplugged)_fregObNcHC8.mp3"></audio> -->
+
 
 </body>
 </html>

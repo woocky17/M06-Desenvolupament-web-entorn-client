@@ -1,37 +1,131 @@
-// Esperar que el DOM estigui completament carregat
-document.addEventListener('DOMContentLoaded', () => {
-    // Funció per crear i omplir la taula
-    function crearTaulaPropietats() {
-        const taulaDiv = document.getElementById('taula_propietats');
+window.onload = function() {
 
-        // Crear la taula
-        const taula = document.createElement('table');
-        const capcelera = taula.createTHead();
-        const filaCapcelera = capcelera.insertRow(0);
-        filaCapcelera.insertCell(0).textContent = 'Propietat';
-        filaCapcelera.insertCell(1).textContent = 'Valor';
+    
+            let llista = document.getElementById("llista_propietats");
+            llista.innerHTML = `<table border=1 cellspacing=0>
+                <tr>
+                    <td>Valor màxim que pot tenir un número JS</td>
+                    <td> ${Number.MAX_VALUE}</td>
+                </tr>
+    
+                <tr>
+                    <td>Altura total de la pantalla</td>
+                    <td>${screen.height}</td>
+                </tr>
+    
+                <tr>
+                    <td>Altura interna de la finestra</td>
+                    <td>${window.innerHeight}</td>
+                </tr>
+    
+                <tr>
+                    <td>URL de la web</td>
+                    <td>${window.location.href}</td>
+                </tr>
+            </table>`;
+        
+    
 
-        const cosTaula = taula.createTBody();
 
-        // Propietats i valors
-        const propietats = [
-            { text: 'Valor màxim que pot tenir un número JS', valor: Number.MAX_VALUE },
-            { text: 'Altura total de la pantalla', valor: screen.height },
-            { text: 'Altura interna de la finestra', valor: window.innerHeight },
-            { text: 'URL de la web', valor: window.location.href }
-        ];
+    let countdownInterval;
+    let time = 0; 
+    let isPaused = false;
 
-        // Afegir cada propietat a la taula
-        propietats.forEach(propietat => {
-            const fila = cosTaula.insertRow();
-            fila.insertCell(0).textContent = propietat.text;
-            fila.insertCell(1).textContent = propietat.valor;
+    let minutosInput = document.getElementById('minutes');
+    let segundosInput = document.getElementById('seconds');
+    let countdown = document.getElementById('countdown');
+    let alarma = document.getElementById('alarm');
+
+    // Assegura que els botons existeixen
+    let startButton = document.getElementById('start');
+    let pauseButton = document.getElementById('pause');
+    let resetButton = document.getElementById('reset');
+
+    // Afegeix els event listeners només si els botons existeixen
+    if (startButton && pauseButton && resetButton) {
+        startButton.addEventListener('click', function() {
+            if (isPaused) {
+                isPaused = false;
+            } else {
+                let minutos = parseInt(minutosInput.value, 10);
+                let segundos = parseInt(segundosInput.value, 10);
+                time = minutos * 60 + segundos; 
+            }
+
+            if (time > 0) {
+                clearInterval(countdownInterval);
+                countdownInterval = setInterval(updateCountdown, 1000);
+            }
         });
 
-        // Afegir la taula al div
-        taulaDiv.appendChild(taula);
+        pauseButton.addEventListener('click', function() {
+            isPaused = true;
+            clearInterval(countdownInterval);
+        });
+
+        resetButton.addEventListener('click', function() {
+            clearInterval(countdownInterval);
+            time = 0;
+            countdown.textContent = '00:00';
+            minutosInput.value = 0;
+            segundosInput.value = 0;
+            alarma.pause(); 
+            alarma.currentTime = 0;
+        });
+    } else {
+        console.error("Els botons no s'han trobat!");
     }
 
-    // Cridar la funció per crear la taula
-    crearTaulaPropietats();
-});
+    function updateCountdown() {
+        if (time <= 0) {
+            clearInterval(countdownInterval);
+            alarma.play();
+        } else {
+            time--;
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            countdown.innerHTML = '<span>' + minutes.toString().padStart(2, '0') + ':' + seconds.toString().padStart(2, '0') + '</span>';
+        }
+    }
+
+window.setInterval(Time(), 1000)
+
+let alarmTime = null;
+let alarmTimeout = null;
+
+function Time() {
+    return ()=>{
+    let data = new Date();
+
+    let hours = data.getHours()
+    let minutes = data.getMinutes()
+    let seconds = data.getSeconds()
+
+    hora.innerHTML = `Hora actual: ${hours}:${minutes}:${seconds}`; 
+
+        if (alarmTime && `${hours}:${minutes}` === alarmTime) {
+        playAlarm();
+        }
+        }
+    }
+    document.getElementById('setAlarma').addEventListener('click', () => {
+        let alarmInput = document.getElementById('alarmTime').value;
+        if (alarmInput) {
+            alarmTime = alarmInput; 
+            document.getElementById('alarmStatus').textContent = `Alarma establerta per a ${alarmTime}`;
+        }
+    });
+
+    let alarmHour = document.getElementById('alarmHour');
+
+    document.getElementById('stopAlarm').addEventListener('click', () => {
+        alarmHour.pause(); 
+    });
+
+    function playAlarm() {
+        alarmHour.play(); 
+        clearInterval(alarmTimeout); 
+
+        setInterval(StopAlarm,10000)
+    }
+}
