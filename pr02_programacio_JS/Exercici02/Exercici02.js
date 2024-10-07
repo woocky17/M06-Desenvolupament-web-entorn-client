@@ -88,26 +88,25 @@ window.onload = function() {
         }
     }
 
-window.setInterval(Time(), 1000)
+window.setInterval(Time, 1000)
 
 let alarmTime = null;
-let alarmTimeout = null;
+let isAlarmPlaying = false;
+let alarmSound = document.getElementById('alarmHour');
 
 function Time() {
-    return ()=>{
     let data = new Date();
 
-    let hours = data.getHours()
-    let minutes = data.getMinutes()
-    let seconds = data.getSeconds()
+    let hours = data.getHours();
+    let minutes = data.getMinutes();
+    let seconds = data.getSeconds();
 
     hora.innerHTML = `Hora actual: ${hours}:${minutes}:${seconds}`; 
 
-        if (alarmTime && `${hours}:${minutes}` === alarmTime) {
+    if (alarmTime && `${hours}:${minutes}` === alarmTime) {
         playAlarm();
-        }
-        }
     }
+}
     document.getElementById('setAlarma').addEventListener('click', () => {
         let alarmInput = document.getElementById('alarmTime').value;
         if (alarmInput) {
@@ -116,16 +115,52 @@ function Time() {
         }
     });
 
-    let alarmHour = document.getElementById('alarmHour');
+    function stopAlarm() {
+        alarmSound.pause(); 
+        alarmSound.currentTime = 0; 
+        isAlarmPlaying = false; 
+        alarmTime = null; 
+        document.getElementById('alarmStatus').textContent = 'Alarma aturada';
+    };
 
-    document.getElementById('stopAlarm').addEventListener('click', () => {
-        alarmHour.pause(); 
-    });
+    document.getElementById('stopAlarm').addEventListener('click', stopAlarm);
+
 
     function playAlarm() {
-        alarmHour.play(); 
-        clearInterval(alarmTimeout); 
-
-        setInterval(StopAlarm,10000)
+    if (!isAlarmPlaying) {
+        alarmSound.play();
+        isAlarmPlaying = true;
     }
+    }
+
+    document.getElementById('song1').addEventListener('click', function() {
+    let alarmSound = document.getElementById('alarmHour');
+    alarmSound.src = 'Nirvana - The Man Who Sold The World (MTV Unplugged)_fregObNcHC8.mp3';
+    alarmSound.load(); 
+    if (isAlarmPlaying) {   
+        alarmSound.play();
+    }
+});
+
+document.getElementById('song2').addEventListener('click', function() {
+    let alarmSound = document.getElementById('alarmHour');
+    alarmSound.src = 'UNSHAKEN _ Low Bass Singer Cover - Geoff Castellucci _ Red Dead Redemption 2_v2XOy7sqEmI.mp3';
+    alarmSound.load(); 
+    if (isAlarmPlaying) {   
+        alarmSound.play();
+    }
+});
+
+document.getElementById('vol').addEventListener('input', function() {
+    let volume = parseFloat(this.value);
+    document.getElementById('alarmHour').volume = volume;
+});
+
+document.getElementById('playMusica').addEventListener('click', function () {
+    playAlarm();
+});
+document.getElementById('pauseMusica').addEventListener('click', function () {
+    alarmSound.pause(); 
+        isAlarmPlaying = false; 
+});
 }
