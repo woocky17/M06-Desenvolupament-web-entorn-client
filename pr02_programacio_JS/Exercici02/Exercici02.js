@@ -102,13 +102,14 @@ function Time() {
     let seconds = data.getSeconds();
 
     hora.innerHTML = `Hora actual: ${hours}:${minutes}:${seconds}`; 
-
-    if (alarmTime && `${hours}:${minutes}` === alarmTime) {
+    
+    if (alarmTime && `${hours}:${minutes}` == alarmTime) {
         playAlarm();
     }
 }
     document.getElementById('setAlarma').addEventListener('click', () => {
         let alarmInput = document.getElementById('alarmTime').value;
+        
         if (alarmInput) {
             alarmTime = alarmInput; 
             document.getElementById('alarmStatus').textContent = `Alarma establerta per a ${alarmTime}`;
