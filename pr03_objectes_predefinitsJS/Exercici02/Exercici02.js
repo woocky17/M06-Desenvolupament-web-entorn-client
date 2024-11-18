@@ -35,18 +35,28 @@ start.addEventListener("click", function startButton() {
             "_blank",
             `width=${width},height=${height},top=${top},left=${left}`
           );
-        // } else if (!first && time % 3 === 0) {
-        //   let top = 20 + Math.floor(Math.random() * 300);
-        //   let left = 20 + Math.floor(Math.random() * 300);
+        } else if (!first && time % 3 === 0) {
+          let top = 20 + Math.floor(Math.random() * 300);
+          let left = 20 + Math.floor(Math.random() * 300);
   
-        //   console.log("abrir ventana 2 " + first);
+          console.log("abrir ventana 2 " + first);
   
-        //   window.open(
-        //     "RandomWindow.html",
-        //     "_blank",
-        //     `width=250,height=250,top=${top},left=${left}`
-        //   );
+          window.open(
+            "RandomWindow.html",
+            "_blank",
+            `width=250,height=250,top=${top},left=${left}`
+          );
         }
+        let windowInfo = localStorage.getItem("windowInfo");
+        let JsonWindowInfo = JSON.parse(windowInfo);
+        let color = JsonWindowInfo.color;
+        console.log(color);
+        document.getElementById("color").innerHTML = color;
       }
+
+      
   }, 1000);
+
+
+ 
 });
