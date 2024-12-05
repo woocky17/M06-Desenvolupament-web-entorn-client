@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Torres de Hanoi</title>
+  </head>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    crossorigin="anonymous"
+  />
+  <script src="Hanoi.js" defer></script>
+  <style>
+    .caja1,
+    .caja2,
+    .caja3 {
+      display: flex;
+      flex-direction: column; /* Apila desde abajo */
+      align-items: center; /* Centra los discos horizontalmente */
+      justify-content: flex-end; /* Asegura que los discos se queden abajo */
+      width: 33.3%;
+      height: 450px;
+      padding: 10px;
+      border: 1px solid black;
+      background-color: rgb(93, 159, 217);
+    }
+    .caja2 {
+      background-color: rgb(246, 197, 99);
+    }
+    .caja3 {
+      background-color: rgb(241, 95, 98);
+    }
+
+    .boton-container {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 10px; /* Separación entre las torres y los botones */
+    }
+
+    .boton {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .boton button {
+      width: 100px; /* Controla el tamaño de los botones */
+    }
+  </style>
+  <body>
+    <br />
+
+    <div class="align-content-center">
+      <label for="number">Número de discos:</label>
+      <input type="number" id="number" />
+      <button onclick="start()">start</button>
+    </div>
+    <br />
+    <div class="container-fluid d-flex" id="cajas">
+      <div class="caja1" id="torre1"></div>
+      <div class="caja2" id="torre2"></div>
+      <div class="caja3" id="torre3"></div>
+    </div>
+    <div class="boton-container">
+      <div class="boton">
+        <button onclick="selectDisk('torre1')">Seleccionar</button>
+        <button onclick="moveDisk('torre1')">Mover aquí</button>
+      </div>
+      <div class="boton">
+        <button onclick="selectDisk('torre2')">Seleccionar</button>
+        <button onclick="moveDisk('torre2')">Mover aquí</button>
+      </div>
+      <div class="boton">
+        <button onclick="selectDisk('torre3')">Seleccionar</button>
+        <button onclick="moveDisk('torre3')">Mover aquí</button>
+      </div>
+    </div>
+  </body>
+</html>
